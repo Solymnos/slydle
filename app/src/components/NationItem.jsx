@@ -42,11 +42,11 @@ const BadItem = styled.div`
     align-content: center;
     align-items: center;
     text-align: center;
-    background-color: #8B0000 ;
+    background-color: #B22222 ;
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-radius: 0.75rem;
-    border : 2px #8B0000 solid;
+    border : 2px #B22222 solid;
     font-weight: bold;
     opacity: 0;
     height: 6rem;
@@ -62,11 +62,11 @@ const BadItemUnanimated = styled.div`
     align-content: center;
     align-items: center;
     text-align: center;
-    background-color: #8B0000 ;
+    background-color: #B22222 ;
     padding-top: 1rem;
     padding-bottom: 1rem;
     border-radius: 0.75rem;
-    border : 2px #8B0000 solid;
+    border : 2px #B22222 solid;
     font-weight: bold;
 `
 

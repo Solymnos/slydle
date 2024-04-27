@@ -1,7 +1,7 @@
 import React , { useState } from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
-import data from '../data/data_slydle.json';
+import data from '../data/data_slydle_update.json';
 import ArrayHeader from './ArrayHeader';
 import ArrayContent from './ArrayContent';
 
