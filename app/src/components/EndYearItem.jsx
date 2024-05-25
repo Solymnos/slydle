@@ -16,6 +16,9 @@ const GoodItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -34,6 +37,9 @@ const GoodItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #2E8B57  solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
 const BadItem = styled.div`
@@ -50,6 +56,9 @@ const BadItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -68,12 +77,19 @@ const BadItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #B22222 solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
-// TODO : Ajouter Fleche (je devrais gérer le "présent");
+const Img = styled.img`
+    width: 3rem;
+    height: 3rem;
+    transform: ${({ flipped }) => flipped ? 'scaleY(-1)' : 'none'};
+`
 
 function EndYearItem({currentChoice, answer, animate}) 
-{  
+{
     if (currentChoice.EndYear === answer.EndYear)
     {
         if (animate)
@@ -88,14 +104,25 @@ function EndYearItem({currentChoice, answer, animate})
             )
         }
     } else {
+        let rotate = false;
+        if (currentChoice.EndYear > answer.EndYear || currentChoice.answer === 'Présent')
+        {
+            rotate = true
+        }
         if (animate)
         {
             return (
-                <BadItem delay={1.6} animate={true}>{currentChoice.EndYear}</BadItem>
+                <BadItem delay={1.6} animate={true}>
+                    <Img src={'./img/icons/Arrow.png'} flipped={rotate}/>
+                    {currentChoice.EndYear}
+                </BadItem>
             )
         } else {
             return (
-                <BadItemUnanimated>{currentChoice.EndYear}</BadItemUnanimated>
+                <BadItemUnanimated>
+                    <Img src={'./img/icons/Arrow.png'} flipped={rotate}/>
+                    {currentChoice.EndYear}
+                </BadItemUnanimated>
             )
         }
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderLogo from '../img/Header_Logo.png';
 
 const HeaderContainer = styled.header`
     color: white;
@@ -23,7 +22,7 @@ const HeaderIcon = styled.img`
 function Header() {
   return (
     <HeaderContainer>
-        <HeaderIcon src={HeaderLogo}/>
+        <HeaderIcon src={'./img/Header_Logo.png'}/>
     </HeaderContainer>
   )
 }

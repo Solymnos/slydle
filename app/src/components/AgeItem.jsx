@@ -84,6 +84,9 @@ const BadItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -93,7 +96,7 @@ const BadItemUnanimated = styled.div`
     flex: 1;
     height: 6rem;
     color: white;
-    align-content: center;
+    align-content: space-around;
     align-items: center;
     text-align: center;
     background-color: #B22222 ;
@@ -102,6 +105,14 @@ const BadItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #B22222 solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+`
+const Img = styled.img`
+    width: 3rem;
+    height: 3rem;
+    transform: ${({ flipped }) => flipped ? 'scaleY(-1)' : 'none'};
 `
 
 function AgeItem({currentChoice, answer, animate}) 
@@ -132,16 +143,26 @@ function AgeItem({currentChoice, answer, animate})
             )
         }
     } else {
-        // TODO : ajouter image fleche vers le haut ou vers le bas
+        let rotate = false;
+        if (currentChoice.Age > answer.Age)
+        {
+            rotate = true;  
+        }
         if (animate)
         {
             return (
-                <BadItem delay={0.2} animate={true}>{currentChoice.Age}</BadItem>
+                <BadItem delay={0.2} animate={true}>
+                    <Img src={'./img/icons/Arrow.png'} flipped={rotate}/>
+                    {currentChoice.Age}
+                </BadItem>
             )
         } else 
         {
             return (
-                <BadItemUnanimated>{currentChoice.Age}</BadItemUnanimated>
+                <BadItemUnanimated>
+                    <Img src={'./img/icons/Arrow.png'} flipped={rotate}/>
+                    {currentChoice.Age}
+                </BadItemUnanimated>
             )
         }
     }

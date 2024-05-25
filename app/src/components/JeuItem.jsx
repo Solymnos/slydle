@@ -105,44 +105,46 @@ const BadItemUnanimated = styled.div`
 `
 
 function JeuItem({currentChoice, answer, animate}) 
-{  
-    if (currentChoice.Game === answer.Game)
+{ 
+    const equal = (a,b) => JSON.stringify(a.sort()) === JSON.stringify(b.sort());
+    const txt = currentChoice.Game.join(' / ');
+    
+    if (equal(currentChoice.Game, answer.Game))
     {
         if (animate)
         {
             return (
-                <GoodItem delay={0.6} animate={true}>{currentChoice.Game}</GoodItem>
+                <GoodItem delay={0.6} animate={true}>{txt}</GoodItem>
             )
         } else 
         {
             return (
-                <GoodItemUnanimated>{currentChoice.Game}</GoodItemUnanimated>
+                <GoodItemUnanimated>{txt}</GoodItemUnanimated>
             )
         }
     }
-    // TODO : Gérer quand il y a plusieurs jeux, afficher multigaming sinon
-    else if (1 === 0)
+    else if (answer.Game.some(element => currentChoice.Game.includes(element)))
     {
         if (animate)
         {
             return (
-                <MixedItem delay={0.6} animate={true}>{currentChoice.Game}</MixedItem>
+                <MixedItem delay={0.6} animate={true}>{txt}</MixedItem>
             )
         } else 
         {
             return (
-                <MixedItemUnanimated>{currentChoice.Game}</MixedItemUnanimated>
+                <MixedItemUnanimated>{txt}</MixedItemUnanimated>
             )
         }
     } else {
         if (animate)
         {
             return (
-                <BadItem delay={0.6} animate={true}>{currentChoice.Game}</BadItem>
+                <BadItem delay={0.6} animate={true}>{txt}</BadItem>
             )
         } else {
             return (
-                <BadItemUnanimated>{currentChoice.Game}</BadItemUnanimated>
+                <BadItemUnanimated>{txt}</BadItemUnanimated>
             )
         }
     }

@@ -16,6 +16,9 @@ const GoodItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -34,6 +37,9 @@ const GoodItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #2E8B57  solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
 const BadItem = styled.div`
@@ -50,6 +56,9 @@ const BadItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -68,9 +77,15 @@ const BadItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #B22222 solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
-// TODO : Ajouter l'image du drapeau du pays
+const Flag = styled.img`
+    max-width: 4rem;
+    max-height: 4rem;
+`
 
 function NationItem({currentChoice, answer, animate}) 
 {  
@@ -79,23 +94,35 @@ function NationItem({currentChoice, answer, animate})
         if (animate)
         {
             return (
-                <GoodItem delay={0.8} animate={true}>{currentChoice.NationName}</GoodItem>
+                <GoodItem delay={0.8} animate={true}>
+                    <Flag src={'.' + currentChoice.NationLogo} />
+                    {currentChoice.NationName}
+                </GoodItem>
             )
         } else 
         {
             return (
-                <GoodItemUnanimated>{currentChoice.NationName}</GoodItemUnanimated>
+                <GoodItemUnanimated>
+                    <Flag src={'.' + currentChoice.NationLogo} />
+                    {currentChoice.NationName}
+                </GoodItemUnanimated>
             )
         }
     } else {
         if (animate)
         {
             return (
-                <BadItem delay={0.8} animate={true}>{currentChoice.NationName}</BadItem>
+                <BadItem delay={0.8} animate={true}>
+                    <Flag src={'.' + currentChoice.NationLogo} />
+                    {currentChoice.NationName}
+                </BadItem>
             )
         } else {
             return (
-                <BadItemUnanimated>{currentChoice.NationName}</BadItemUnanimated>
+                <BadItemUnanimated>
+                    <Flag src={'.' + currentChoice.NationLogo} />
+                    {currentChoice.NationName}
+                </BadItemUnanimated>
             )
         }
     }

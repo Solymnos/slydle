@@ -105,44 +105,46 @@ const BadItemUnanimated = styled.div`
 `
 
 function RoleItem({currentChoice, answer, animate}) 
-{  
-    if (currentChoice.Role === answer.Role)
+{
+    const equal = (a, b) => JSON.stringify(a.sort()) === JSON.stringify(b.sort());
+    const txt = currentChoice.Role.join(' / ');
+    
+    if (equal(currentChoice.Role, answer.Role))
     {
         if (animate)
         {
             return (
-                <GoodItem delay={0.4} animate={true}>{currentChoice.Role}</GoodItem>
+                <GoodItem delay={0.4} animate={true}>{txt}</GoodItem>
             )
         } else 
         {
             return (
-                <GoodItemUnanimated>{currentChoice.Role}</GoodItemUnanimated>
+                <GoodItemUnanimated>{txt}</GoodItemUnanimated>
             )
         }
     }
-    // TODO : Gérer quand il y a quelques choix en commun (need modification de la data)
-    else if (1 === 0)
+    else if (answer.Role.some(element => currentChoice.Role.includes(element)))
     {
         if (animate)
         {
             return (
-                <MixedItem delay={0.4} animate={true}>{currentChoice.Role}</MixedItem>
+                <MixedItem delay={0.4} animate={true}>{txt}</MixedItem>
             )
         } else 
         {
             return (
-                <MixedItemUnanimated>{currentChoice.Role}</MixedItemUnanimated>
+                <MixedItemUnanimated>{txt}</MixedItemUnanimated>
             )
         }
     } else {
         if (animate)
         {
             return (
-                <BadItem delay={0.4} animate={true}>{currentChoice.Role}</BadItem>
+                <BadItem delay={0.4} animate={true}>{txt}</BadItem>
             )
         } else {
             return (
-                <BadItemUnanimated>{currentChoice.Role}</BadItemUnanimated>
+                <BadItemUnanimated>{txt}</BadItemUnanimated>
             )
         }
     }

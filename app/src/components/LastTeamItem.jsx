@@ -16,6 +16,9 @@ const GoodItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -34,6 +37,9 @@ const GoodItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #2E8B57  solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
 const BadItem = styled.div`
@@ -50,6 +56,9 @@ const BadItem = styled.div`
     font-weight: bold;
     opacity: 0;
     height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     ${({ animate , delay }) =>
         animate && css`animation: ${flipAnimation} 1s ease ${delay}s forwards;`
     }
@@ -68,35 +77,52 @@ const BadItemUnanimated = styled.div`
     border-radius: 0.75rem;
     border : 2px #B22222 solid;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `
 
-// TODO : Ajouter Image de l'équipe
-// TODO : Modifier pour bien gérer l'équipe précédente
+const TeamLogo = styled.img`
+    max-width: 4rem;
+    max-height: 4rem;
+`
 
 function LastTeamItem({currentChoice, answer, animate}) 
-{  
-    if (currentChoice.Actual === answer.Actual)
+{
+    if (currentChoice.Last === answer.Last)
     {
         if (animate)
         {
             return (
-                <GoodItem delay={1.0} animate={true}>{currentChoice.Actual}</GoodItem>
+                <GoodItem delay={1.0} animate={true}>
+                    <TeamLogo src={'.' + currentChoice.LastLogo} />
+                    {currentChoice.Last}
+                </GoodItem>
             )
         } else 
         {
             return (
-                <GoodItemUnanimated>{currentChoice.Actual}</GoodItemUnanimated>
+                <GoodItemUnanimated>
+                    <TeamLogo src={'.' + currentChoice.LastLogo} />
+                    {currentChoice.Last}
+                </GoodItemUnanimated>
             )
         }
     } else {
         if (animate)
         {
             return (
-                <BadItem delay={1.0} animate={true}>{currentChoice.Actual}</BadItem>
+                <BadItem delay={1.0} animate={true}>
+                    <TeamLogo src={'.' + currentChoice.LastLogo} />
+                    {currentChoice.Last}
+                </BadItem>
             )
         } else {
             return (
-                <BadItemUnanimated>{currentChoice.Actual}</BadItemUnanimated>
+                <BadItemUnanimated>
+                    <TeamLogo src={'.' + currentChoice.LastLogo} />
+                    {currentChoice.Last}
+                </BadItemUnanimated>
             )
         }
     }
