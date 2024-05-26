@@ -97,9 +97,18 @@ const HomePage = () =>
       setAnswer(response.response.data);
     }
     function verifyDaily() {
-      const dateToTest = user.lastDate;
+      const dateToTest = new Date(user.lastDate);
+      console.log("====DATE DATE DATE===")
+      console.log(user.lastDate);
+      console.log(dateToTest);
       const now = new Date();
       const day = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      
+      console.log("====DATE TO TEST====")
+      console.log (dateToTest)
+      console.log('====DAY====')
+      console.log(day)
+      console.log(dateToTest < day)
       if (dateToTest < day)
       {
         dispatch(setDaily({ didItToday : false, date : null, tries : null }))
