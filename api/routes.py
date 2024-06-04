@@ -45,7 +45,7 @@ def daily_task():
     print("update")
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(daily_task, 'cron', hour=00, minute=0)
+scheduler.add_job(daily_task, 'cron', hour=22, minute=0)
 scheduler.start()
 
 oauth_2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -109,17 +109,6 @@ async def user_login(request : UserLoginRequest):
     rank = await get_user_rank(_id)
     return { "user": user_to_return, "access_token" : access_token, "rank" : rank }
     
-@router.get("/data/choices")
-async def get_choices():
-    try :
-        with open(os.path.join(os.path.dirname(__file__), "data_slydle_update.json"), "r") as file:
-            data = json.load(file)
-        return JSONResponse(content=data)
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Erreur avec les données de l'application")
-    except json.JSONDecodeError:
-        raise HTTPException(status_code=500, detail="JSON is corrupted")
-    
 class DataRankingResponse(BaseModel):
     id : str
     username : str
@@ -166,6 +155,9 @@ async def update_score(request: UserUpdateScore, token: str = Depends(oauth_2_sc
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Crédits non valides", headers={"WWW-Authenticate" : "Bearer"})   
     users = get_users()
     user = await users.find_one({"_id" : ObjectId(request.id)})
+    did_it_today = user.get("did_it_today", False)
+    if did_it_today :
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Update already done") 
     update_fields = {"score" : user["score"] + request.score_update}
     update_fields["streak"] = user["streak"] + 1
     update_fields["did_it_today"] = True    
@@ -179,7 +171,7 @@ async def update_score(request: UserUpdateScore, token: str = Depends(oauth_2_sc
 @router.get("/data/choices")
 async def get_choices():
     try :
-        with open("data_slydle_update.json","r") as file:
+        with open("data_slydle_update.json","r", encoding="utf-8") as file:
             data = json.load(file)
         return data
     except FileNotFoundError:

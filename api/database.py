@@ -21,6 +21,8 @@ async def connexion_to_database():
         users = database.get_collection("users")
     except OperationFailure as e:
         print(f"Erreur lors de la connexion à MongoDB: {e}")
+    except Exception as e:
+        print(f"Une erreur innatendue : {str(e)}")
 
 def get_users():
     return users

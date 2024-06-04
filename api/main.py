@@ -15,7 +15,7 @@ async def lifespan(app : FastAPI):
     yield
     print('lifespan end')
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, docs_url=None)
 
 # CORS Settings
 
