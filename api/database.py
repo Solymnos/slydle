@@ -4,7 +4,7 @@ from pymongo.errors         import OperationFailure
 # Declaration of my environements variables:
 # TODO : Move it into a .env file
 
-MONGO_DB_URL = "mongodb+srv://Solymnos:1ncubus0Wmongodb@sly-api-db.rdzdzn5.mongodb.net/slydle?retryWrites=true&w=majority"
+MONGO_DB_URL = "mongodb+srv://Solymnos:@sly-api-db.rdzdzn5.mongodb.net/slydle?retryWrites=true&w=majority"
 
 # Declaration of my differents variables :
 #   .users = MongoDB users database
